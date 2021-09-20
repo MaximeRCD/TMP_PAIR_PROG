@@ -4,16 +4,6 @@
 # gestion de la matrice
 import numpy as np
 
-morpion = np.matrix([['N', 'N', 'N'], ['N', 'N', 'N'], ['N', 'N', 'N']])
-tableau_gagnant = [[[0, 0], [0, 1], [0, 2]],
-                   [[1, 0], [1, 1], [1, 2]],
-                   [[2, 0], [2, 0], [2, 0]],
-                   [[0, 0], [1, 0], [2, 0]],
-                   [[0, 1], [1, 1], [2, 1]],
-                   [[0, 2], [1, 2], [2, 2]],
-                   [[0, 0], [1, 1], [2, 2]],
-                   [[0, 2], [1, 1], [2, 0]]]
-
 
 def verify_win(tableau_gagnant, morpion):
     for combinaison in tableau_gagnant:
@@ -50,18 +40,56 @@ def choix_du_joueur(state):
     l = int(l)
     c = int(c)
 
-    if l < 0 | l > 2:
+    if j != 'X':
+        if j =='O':
+            pass
+        else:
+            print("Seul les joueurs X et O peuvent jouer ")
+            (j, l, c) = choix_du_joueur(state)
+            l = int(l)
+            c = int(c)
+            return j, l, c
+
+    if j != 'O':
+        if j == 'X':
+            pass
+        else:
+            print("Seul les joueurs X et O peuvent jouer ")
+            (j, l, c) = choix_du_joueur(state)
+            l = int(l)
+            c = int(c)
+            return j, l, c
+
+    if l < 0:
         print("Merci de rentrer un un numéro de ligne entre 0 et 2 ")
-        choix_du_joueur(state)
-    if (c < 0 | c > 2):
+        (j,l,c) = choix_du_joueur(state)
+        l = int(l)
+        c = int(c)
+        return j, l, c
+
+    if l > 2:
+        print("Merci de rentrer un un numéro de ligne entre 0 et 2 ")
+        (j,l,c) = choix_du_joueur(state)
+        l = int(l)
+        c = int(c)
+        return j, l, c
+
+    if c < 0 :
         print("Merci de rentrer un un numéro de colonne entre 0 et 2 ")
-        choix_du_joueur(state)
-    if j == state:
-        print("Vous ne pouvez pas jouer 2x")
-        choix_du_joueur(state)
-    state = j
-    print(state)
+        (j,l,c) = choix_du_joueur(state)
+        l = int(l)
+        c = int(c)
+        return j, l, c
+    if  c > 2:
+        print("Merci de rentrer un un numéro de colonne entre 0 et 2 ")
+        (j,l,c) = choix_du_joueur(state)
+        l = int(l)
+        c = int(c)
+        return j, l, c
+
     return j, l, c
+
+
 
 
 def match_nul(morpion):
@@ -74,10 +102,12 @@ def match_nul(morpion):
     return var
 
 
-def tour(morpion):
+def tour(morpion,state):
     (j, l, c) = choix_du_joueur(state)
     l=int(l)
     c=int(c)
+
+
     if morpion[l, c] != 'N':
         print("Cette case est deja jouer merci de ressaisir une case")
         (j, l, c) = choix_du_joueur(state)
@@ -101,11 +131,11 @@ if __name__ == '__main__':
     boolean=True
 
     #morpion = np.matrix([['O', 'O', 'O'], ['N', 'N', 'N'], ['N', 'N', 'N']])
-    morpion = np.matrix([['N', 'N', 'N'], ['N', 'N', 'N'], ['N', 'N', 'N']])
+    morpion = np.matrix([['N', 'N', 'N'], ['N', 'N', 'N'], ['N', 'N', 'N']])# MATRICE DE BASE NULL
     #verify_win(tableau_gagnant,morpion)
 
     while boolean:
-        tour(morpion)
+        tour(morpion,state)
         print(morpion)
         if verify_win(tableau_gagnant,morpion):
             verify_win(tableau_gagnant,morpion)
