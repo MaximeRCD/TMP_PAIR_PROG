@@ -3,7 +3,7 @@
 
 
 def hello_world():
-    print('Hello world')
+    print('Hello maxime')
 
 
 if __name__ == '__main__':
