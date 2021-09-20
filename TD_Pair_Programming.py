@@ -16,9 +16,9 @@ def verify_win(tableau_gagnant, morpion):
             if morpion[combinaison[0][0], combinaison[0][1]] == "N":
                 return False
             else:
-                print(morpion[combinaison[0][0], combinaison[0][1]])
-                print(morpion[combinaison[1][0], combinaison[1][1]])
-                print(morpion[combinaison[2][0], combinaison[2][1]])
+                #print(morpion[combinaison[0][0], combinaison[0][1]])
+                #print(morpion[combinaison[1][0], combinaison[1][1]])
+                #print(morpion[combinaison[2][0], combinaison[2][1]])
                 print(f"Le joueur {morpion[combinaison[0][0], combinaison[0][1]]} à gagner !")
                 return True
     return False
@@ -125,9 +125,10 @@ def tour(morpion, state):
 
 
 if __name__ == '__main__':
+
     tableau_gagnant = [[[0, 0], [0, 1], [0, 2]],
                        [[1, 0], [1, 1], [1, 2]],
-                       [[2, 0], [2, 0], [2, 0]],
+                       [[2, 0], [2, 1], [2, 2]],
                        [[0, 0], [1, 0], [2, 0]],
                        [[0, 1], [1, 1], [2, 1]],
                        [[0, 2], [1, 2], [2, 2]],
@@ -135,10 +136,7 @@ if __name__ == '__main__':
                        [[0, 2], [1, 1], [2, 0]]]
     state = ['N']
     boolean = True
-
-    # morpion = np.matrix([['O', 'O', 'O'], ['N', 'N', 'N'], ['N', 'N', 'N']])
     morpion = np.matrix([['N', 'N', 'N'], ['N', 'N', 'N'], ['N', 'N', 'N']])  # MATRICE DE BASE NULL
-    # verify_win(tableau_gagnant,morpion)
 
     while boolean:
         tour(morpion, state)
@@ -154,7 +152,7 @@ if __name__ == '__main__':
                 boolean = False
 
         if match_nul(morpion):
-            u = input("Voulez vous rejouer y or n ?")
+            u = input("Match nul !!!  Voulez vous rejouer y or n ?")
             if u == "y":
                 morpion = new_game(morpion)
             else:
